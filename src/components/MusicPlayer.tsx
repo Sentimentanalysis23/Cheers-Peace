@@ -6,43 +6,66 @@ import { motion, AnimatePresence } from "framer-motion";
 
 export default function MusicPlayer() {
   const [isPlaying, setIsPlaying] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
   useEffect(() => {
-    // Attempt to autoplay, though browsers usually block this unless there's user interaction
-    const playAudio = async () => {
-      try {
-        if (audioRef.current) {
-          audioRef.current.volume = 0.2; // Soothing low volume
-          await audioRef.current.play();
-          setIsPlaying(true);
-        }
-      } catch (error) {
-        console.log("Autoplay blocked by browser. Waiting for user interaction.");
-      }
-    };
-    
-    // playAudio(); // Uncomment to try autoplay
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
-  const [isLoading, setIsLoading] = useState(false);
+  // On mobile, iOS blocks preload. We manually trigger load on mount
+  // so audio is buffered by the time user taps play.
+  useEffect(() => {
+    if (audioRef.current) {
+      audioRef.current.volume = 0.25;
+      // Trigger the browser to start fetching audio data immediately
+      audioRef.current.load();
+    }
+  }, []);
 
   const toggleMusic = async () => {
-    if (audioRef.current) {
-      if (isPlaying) {
-        audioRef.current.pause();
-        setIsPlaying(false);
-      } else {
-        setIsLoading(true);
-        try {
-          await audioRef.current.play();
-          setIsPlaying(true);
-        } catch (error) {
-          console.error("Playback failed", error);
-        } finally {
-          setIsLoading(false);
-        }
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    if (isPlaying) {
+      audio.pause();
+      setIsPlaying(false);
+      return;
+    }
+
+    setIsLoading(true);
+
+    // On iOS, audio.readyState may be 0 (HAVE_NOTHING). We wait for canplay.
+    const tryPlay = async () => {
+      try {
+        await audio.play();
+        setIsPlaying(true);
+      } catch (err) {
+        console.error("Playback failed:", err);
+      } finally {
+        setIsLoading(false);
       }
+    };
+
+    if (audio.readyState >= 2) {
+      // Already loaded enough — play immediately
+      await tryPlay();
+    } else {
+      // Wait for it to load
+      const onCanPlay = async () => {
+        audio.removeEventListener("canplay", onCanPlay);
+        await tryPlay();
+      };
+      audio.addEventListener("canplay", onCanPlay);
+      // Fallback: if canplay never fires within 5s, try anyway
+      setTimeout(async () => {
+        audio.removeEventListener("canplay", onCanPlay);
+        await tryPlay();
+      }, 5000);
     }
   };
 
@@ -53,10 +76,22 @@ export default function MusicPlayer() {
         loop
         preload="auto"
         playsInline
+        x-webkit-airplay="allow"
       >
-        <source src="/audio/bgm.mp3" type="audio/mpeg" />
-        <source src="/audio/bgm.webm" type="audio/webm" />
+        {/* Serve small mobile version first for quick loading on phones */}
+        {isMobile ? (
+          <>
+            <source src="/audio/bgm_mobile.mp3" type="audio/mpeg" />
+            <source src="/audio/bgm.mp3" type="audio/mpeg" />
+          </>
+        ) : (
+          <>
+            <source src="/audio/bgm.mp3" type="audio/mpeg" />
+            <source src="/audio/bgm.webm" type="audio/webm" />
+          </>
+        )}
       </audio>
+
       <div className="fixed bottom-6 right-6 z-50">
         <button
           onClick={toggleMusic}
@@ -67,9 +102,7 @@ export default function MusicPlayer() {
             {isLoading ? (
               <motion.div
                 key="loading"
-                initial={{ opacity: 0, scale: 0.5 }}
-                animate={{ opacity: 1, scale: 1, rotate: 360 }}
-                exit={{ opacity: 0, scale: 0.5 }}
+                animate={{ rotate: 360 }}
                 transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
                 className="w-5 h-5 border-2 border-[#D4AF37] border-t-transparent rounded-full"
               />
