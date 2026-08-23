@@ -126,7 +126,7 @@ export default function EnhancedLuxuryHome() {
                 animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
                 exit={{ opacity: 0, y: -40, filter: "blur(10px)" }}
                 transition={{ duration: 0.8, type: "spring", bounce: 0.4 }}
-                className="font-[family-name:var(--font-playfair)] text-4xl md:text-6xl lg:text-7xl text-white font-medium tracking-tight leading-tight drop-shadow-[0_4px_4px_rgba(0,0,0,1)] text-center max-w-6xl"
+                className="font-[family-name:var(--font-playfair)] text-3xl sm:text-4xl md:text-6xl lg:text-7xl text-white font-medium tracking-tight leading-tight drop-shadow-[0_4px_4px_rgba(0,0,0,1)] text-center max-w-6xl"
               >
                 {SLIDES[currentSlide].title}
               </motion.h1>
@@ -269,8 +269,8 @@ export default function EnhancedLuxuryHome() {
 
       <div id="capabilities">
         <HorizontalScroll>
-          <div className="w-[400px] shrink-0 text-white pl-12">
-            <h2 className="font-[family-name:var(--font-playfair)] text-5xl md:text-7xl mb-6 text-[#C1836A]">Our Capabilities</h2>
+          <div className="w-[85vw] md:w-[400px] shrink-0 text-white pl-6 md:pl-12">
+            <h2 className="font-[family-name:var(--font-playfair)] text-4xl md:text-7xl mb-6 text-[#C1836A]">Our Capabilities</h2>
             <p className="text-xl text-[#FFFFFF]/70 font-light leading-relaxed">
               Scroll to explore the breathtaking environments we engineer from the ground up.
             </p>

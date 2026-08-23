@@ -61,17 +61,20 @@ export default function Header() {
             transition: "opacity 0.3s",
           }}>
             <div style={{
-              position: "relative",
-              height: isMobile ? "72px" : "88px",
-              width: isMobile ? "120px" : "150px",
-              flexShrink: 0,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
             }}>
               <Image
                 src="/images/logo.png"
                 alt="Cheers & Peace Logo"
-                fill
-                sizes="(max-width: 768px) 120px, 150px"
-                style={{ objectFit: "contain" }}
+                width={150}
+                height={80}
+                style={{
+                  width: isMobile ? "100px" : "150px",
+                  height: "auto",
+                  objectFit: "contain"
+                }}
                 priority
               />
             </div>
