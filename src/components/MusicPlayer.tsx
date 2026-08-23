@@ -40,10 +40,13 @@ export default function MusicPlayer() {
     <>
       <audio
         ref={audioRef}
-        src="/audio/bgm.mp3"
         loop
         preload="auto"
-      />
+        playsInline
+      >
+        <source src="/audio/bgm.mp3" type="audio/mpeg" />
+        <source src="/audio/bgm.webm" type="audio/webm" />
+      </audio>
       <div className="fixed bottom-6 right-6 z-50">
         <button
           onClick={toggleMusic}
