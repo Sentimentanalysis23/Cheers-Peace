@@ -7,8 +7,21 @@ export default function CustomCursor() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isHovered, setIsHovered] = useState(false);
   const [cursorText, setCursorText] = useState("");
+  const [isTouch, setIsTouch] = useState(true); // default true to avoid flash on mobile
 
   useEffect(() => {
+    // Detect if the device is a touch device (mobile/tablet)
+    const checkTouch = () => {
+      setIsTouch(window.matchMedia("(pointer: coarse)").matches);
+    };
+    checkTouch();
+    window.addEventListener("resize", checkTouch);
+    return () => window.removeEventListener("resize", checkTouch);
+  }, []);
+
+  useEffect(() => {
+    if (isTouch) return; // Don't add mouse listeners on touch devices
+
     const handleMouseMove = (e: MouseEvent) => {
       setMousePosition({ x: e.clientX, y: e.clientY });
     };
@@ -44,7 +57,10 @@ export default function CustomCursor() {
       window.removeEventListener("mousemove", handleMouseMove);
       window.removeEventListener("mouseover", handleMouseOver);
     };
-  }, []);
+  }, [isTouch]);
+
+  // Don't render anything on touch/mobile devices
+  if (isTouch) return null;
 
   return (
     <>
