@@ -75,20 +75,25 @@ export async function POST(request: Request) {
       ip: clientIP || 'N/A',
     };
 
-    // Save to local JSON file
-    const filePath = path.join(process.cwd(), 'src', 'data', 'inquiries.json');
-    let inquiries: typeof newInquiry[] = [];
+    // Save to local JSON file — skipped gracefully on Vercel (read-only filesystem)
+    try {
+      const filePath = path.join(process.cwd(), 'src', 'data', 'inquiries.json');
+      let inquiries: typeof newInquiry[] = [];
 
-    if (fs.existsSync(filePath)) {
-      const fileData = fs.readFileSync(filePath, 'utf8');
-      inquiries = JSON.parse(fileData);
+      if (fs.existsSync(filePath)) {
+        const fileData = fs.readFileSync(filePath, 'utf8');
+        inquiries = JSON.parse(fileData);
+      }
+
+      inquiries.push(newInquiry);
+      fs.writeFileSync(filePath, JSON.stringify(inquiries, null, 2));
+    } catch {
+      // Filesystem is read-only (e.g. Vercel serverless) — email notification below handles delivery
+      console.warn('ℹ️ Skipping local file write (read-only filesystem)');
     }
 
-    inquiries.push(newInquiry);
-    fs.writeFileSync(filePath, JSON.stringify(inquiries, null, 2));
-
-    // Send email notification (non-blocking — won't fail the request if email fails)
-    sendInquiryNotification({
+    // Send email notification via Resend
+    await sendInquiryNotification({
       name,
       email,
       company: company || 'N/A',
