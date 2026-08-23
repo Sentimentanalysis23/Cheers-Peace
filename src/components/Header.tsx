@@ -45,7 +45,7 @@ export default function Header() {
       }}>
         <div style={{
           width: "100%",
-          padding: "0 40px",
+          padding: isMobile ? "0 16px" : "0 40px",
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",

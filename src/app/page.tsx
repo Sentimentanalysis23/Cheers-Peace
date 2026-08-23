@@ -126,7 +126,7 @@ export default function EnhancedLuxuryHome() {
                 animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
                 exit={{ opacity: 0, y: -40, filter: "blur(10px)" }}
                 transition={{ duration: 0.8, type: "spring", bounce: 0.4 }}
-                className="font-[family-name:var(--font-playfair)] text-5xl md:text-7xl lg:text-[6rem] text-white font-medium tracking-tight leading-tight drop-shadow-[0_4px_4px_rgba(0,0,0,1)] text-center max-w-6xl"
+                className="font-[family-name:var(--font-playfair)] text-4xl md:text-6xl lg:text-7xl text-white font-medium tracking-tight leading-tight drop-shadow-[0_4px_4px_rgba(0,0,0,1)] text-center max-w-6xl"
               >
                 {SLIDES[currentSlide].title}
               </motion.h1>
@@ -221,7 +221,7 @@ export default function EnhancedLuxuryHome() {
             <div className="relative">
               <motion.div 
                 initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ duration: 1 }}
-                className="relative h-[600px] w-full rounded-[2rem] overflow-hidden shadow-2xl border border-[#C1836A]/30"
+                className="relative h-[350px] md:h-[600px] w-full rounded-[2rem] overflow-hidden shadow-2xl border border-[#C1836A]/30"
               >
                 <Image src="/images/event_16.jpg" alt="Outdoor stage with LED wall and truss lighting" fill sizes="(max-width: 1024px) 100vw, 50vw" className="object-cover hover:scale-105 transition-transform duration-[3s]" />
                 <div className="absolute inset-0 bg-gradient-to-tr from-[#000000]/80 via-transparent to-transparent"></div>
@@ -316,7 +316,7 @@ export default function EnhancedLuxuryHome() {
           
           {/* Service 1: Wooden Stall Fabrication */}
           <div className="flex flex-col lg:flex-row items-center gap-16 group">
-            <div className="lg:w-1/2 relative h-[600px] w-full rounded-[2rem] overflow-hidden">
+            <div className="lg:w-1/2 relative h-[350px] lg:h-[600px] w-full rounded-[2rem] overflow-hidden">
               <motion.div 
                 initial={{ opacity: 0, scale: 0.8 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ duration: 1.2 }}
                 className="absolute inset-0 border-2 border-[#C1836A]/30 rounded-[2rem] translate-x-6 translate-y-6 z-0 group-hover:translate-x-3 group-hover:translate-y-3 transition-transform duration-700"
@@ -363,7 +363,7 @@ export default function EnhancedLuxuryHome() {
               <h3 className="font-[family-name:var(--font-playfair)] text-4xl text-black mb-4">The Fabrication Process</h3>
               <p className="text-[#333333]/80">How we bring your brand to the exhibition floor.</p>
             </div>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-x-8 gap-y-16">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-x-8 gap-y-16">
               {[
                 { n: '01', t: 'Concept', d: 'Brief, space & brand study' },
                 { n: '02', t: '3D Design', d: 'Custom stall visualisation' },

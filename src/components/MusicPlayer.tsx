@@ -40,7 +40,7 @@ export default function MusicPlayer() {
     <>
       <audio
         ref={audioRef}
-        src="/audio/bgm.webm"
+        src="/audio/bgm.mp3"
         loop
         preload="auto"
       />

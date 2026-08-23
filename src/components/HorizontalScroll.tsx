@@ -11,9 +11,20 @@ export default function HorizontalScroll({ children }: HorizontalScrollProps) {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [scrollRange, setScrollRange] = useState(0);
 
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   useEffect(() => {
     const updateRange = () => {
-      if (scrollRef.current) {
+      if (scrollRef.current && !isMobile) {
         // Calculate the exact distance needed to scroll the content so its right edge touches the right edge of the viewport
         const range = scrollRef.current.scrollWidth - window.innerWidth;
         setScrollRange(range > 0 ? range : 0);
@@ -23,7 +34,7 @@ export default function HorizontalScroll({ children }: HorizontalScrollProps) {
     updateRange();
     window.addEventListener("resize", updateRange);
     return () => window.removeEventListener("resize", updateRange);
-  }, [children]);
+  }, [children, isMobile]);
 
   const { scrollYProgress } = useScroll({
     target: targetRef,
@@ -31,6 +42,16 @@ export default function HorizontalScroll({ children }: HorizontalScrollProps) {
   });
 
   const x = useTransform(scrollYProgress, [0, 1], [0, -scrollRange]);
+
+  if (isMobile) {
+    return (
+      <section className="relative bg-[#000000] py-20 w-full overflow-hidden">
+        <div className="flex gap-6 px-6 items-center overflow-x-auto snap-x snap-mandatory w-full pb-8">
+          {children}
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section ref={targetRef} className="relative h-[300vh] bg-[#000000]">
