@@ -49,7 +49,7 @@ export default function EnhancedLuxuryHome() {
       
       {/* 0. Ambient Gold Dust Particles (Client Only to prevent Hydration Error) */}
       {mounted && (
-        <div className="fixed inset-0 pointer-events-none z-0">
+        <div className="fixed inset-0 pointer-events-none z-0 hidden md:block">
           {[...Array(20)].map((_, i) => (
           <motion.div
             key={i}
@@ -103,7 +103,7 @@ export default function EnhancedLuxuryHome() {
         <div className="absolute inset-0 z-15 bg-[#000000]/30 mix-blend-multiply" />
         
         {/* Organic dark glow behind text for legibility without a box */}
-        <div className="absolute inset-0 z-15 flex items-center justify-center">
+        <div className="absolute inset-0 z-15 flex items-center justify-center hidden md:flex">
           <div className="w-[800px] h-[400px] bg-[#000000]/70 blur-[100px] rounded-full pointer-events-none" />
         </div>
         

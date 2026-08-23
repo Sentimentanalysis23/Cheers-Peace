@@ -25,14 +25,24 @@ export default function MusicPlayer() {
     // playAudio(); // Uncomment to try autoplay
   }, []);
 
-  const toggleMusic = () => {
+  const [isLoading, setIsLoading] = useState(false);
+
+  const toggleMusic = async () => {
     if (audioRef.current) {
       if (isPlaying) {
         audioRef.current.pause();
+        setIsPlaying(false);
       } else {
-        audioRef.current.play();
+        setIsLoading(true);
+        try {
+          await audioRef.current.play();
+          setIsPlaying(true);
+        } catch (error) {
+          console.error("Playback failed", error);
+        } finally {
+          setIsLoading(false);
+        }
       }
-      setIsPlaying(!isPlaying);
     }
   };
 
@@ -54,7 +64,16 @@ export default function MusicPlayer() {
           aria-label={isPlaying ? "Pause Music" : "Play Music"}
         >
           <AnimatePresence mode="wait">
-            {isPlaying ? (
+            {isLoading ? (
+              <motion.div
+                key="loading"
+                initial={{ opacity: 0, scale: 0.5 }}
+                animate={{ opacity: 1, scale: 1, rotate: 360 }}
+                exit={{ opacity: 0, scale: 0.5 }}
+                transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+                className="w-5 h-5 border-2 border-[#D4AF37] border-t-transparent rounded-full"
+              />
+            ) : isPlaying ? (
               <motion.div
                 key="pause"
                 initial={{ opacity: 0, scale: 0.5 }}
