@@ -5,7 +5,7 @@ import { MapPin, Phone, Mail, ArrowRight } from "lucide-react";
 import Image from "next/image";
 
 export default function ContactPage() {
-  const [formData, setFormData] = useState({ name: "", email: "", company: "", message: "" });
+  const [formData, setFormData] = useState({ name: "", email: "", company: "", location: "", message: "" });
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -19,7 +19,7 @@ export default function ContactPage() {
       });
       if (!res.ok) throw new Error("Submission failed");
       setStatus("success");
-      setFormData({ name: "", email: "", company: "", message: "" });
+      setFormData({ name: "", email: "", company: "", location: "", message: "" });
       setTimeout(() => setStatus("idle"), 5000);
     } catch (error) {
       console.error(error);
@@ -165,6 +165,20 @@ export default function ContactPage() {
                 />
                 <label htmlFor="company" className="absolute left-0 top-4 text-[#FFFFFF]/50 text-sm tracking-widest uppercase transition-all peer-focus:-top-4 peer-focus:text-[#C1836A] peer-focus:text-xs peer-valid:-top-4 peer-valid:text-xs peer-valid:text-[#FFFFFF]/50">
                   Company / Organization
+                </label>
+              </div>
+
+              <div className="relative group">
+                <input 
+                  type="text" 
+                  id="location" 
+                  value={formData.location}
+                  onChange={(e) => setFormData({...formData, location: e.target.value})}
+                  className="w-full bg-transparent border-b border-[#FFFFFF]/20 py-4 text-white placeholder-transparent focus:outline-none focus:border-[#C1836A] peer transition-colors" 
+                  placeholder="Event Location / City" 
+                />
+                <label htmlFor="location" className="absolute left-0 top-4 text-[#FFFFFF]/50 text-sm tracking-widest uppercase transition-all peer-focus:-top-4 peer-focus:text-[#C1836A] peer-focus:text-xs peer-valid:-top-4 peer-valid:text-xs peer-valid:text-[#FFFFFF]/50">
+                  Event Location / City
                 </label>
               </div>
 

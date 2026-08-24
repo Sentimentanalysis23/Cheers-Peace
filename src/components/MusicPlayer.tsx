@@ -38,34 +38,16 @@ export default function MusicPlayer() {
     }
 
     setIsLoading(true);
-
-    // On iOS, audio.readyState may be 0 (HAVE_NOTHING). We wait for canplay.
-    const tryPlay = async () => {
-      try {
-        await audio.play();
-        setIsPlaying(true);
-      } catch (err) {
-        console.error("Playback failed:", err);
-      } finally {
-        setIsLoading(false);
+    try {
+      const playPromise = audio.play();
+      if (playPromise !== undefined) {
+        await playPromise;
       }
-    };
-
-    if (audio.readyState >= 2) {
-      // Already loaded enough — play immediately
-      await tryPlay();
-    } else {
-      // Wait for it to load
-      const onCanPlay = async () => {
-        audio.removeEventListener("canplay", onCanPlay);
-        await tryPlay();
-      };
-      audio.addEventListener("canplay", onCanPlay);
-      // Fallback: if canplay never fires within 5s, try anyway
-      setTimeout(async () => {
-        audio.removeEventListener("canplay", onCanPlay);
-        await tryPlay();
-      }, 5000);
+      setIsPlaying(true);
+    } catch (err) {
+      console.error("Playback failed:", err);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -77,20 +59,8 @@ export default function MusicPlayer() {
         preload="auto"
         playsInline
         x-webkit-airplay="allow"
-      >
-        {/* Serve small mobile version first for quick loading on phones */}
-        {isMobile ? (
-          <>
-            <source src="/audio/bgm_mobile.mp3" type="audio/mpeg" />
-            <source src="/audio/bgm.mp3" type="audio/mpeg" />
-          </>
-        ) : (
-          <>
-            <source src="/audio/bgm.mp3" type="audio/mpeg" />
-            <source src="/audio/bgm.webm" type="audio/webm" />
-          </>
-        )}
-      </audio>
+        src={isMobile ? "/audio/bgm_mobile.mp3" : "/audio/bgm.mp3"}
+      />
 
       <div className="fixed bottom-6 right-6 z-50">
         <button

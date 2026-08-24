@@ -45,7 +45,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.variable} ${playfair.variable} font-sans bg-[#000000] text-[#FFFFFF] antialiased min-h-screen flex flex-col selection:bg-[#C1836A] selection:text-[#000000] cursor-none`}>
+      <body className={`${inter.variable} ${playfair.variable} font-sans bg-[#000000] text-[#FFFFFF] antialiased min-h-screen flex flex-col selection:bg-[#C1836A] selection:text-[#000000] cursor-none overflow-x-hidden`}>
         <CustomCursor />
         <SmoothScroll>
           <Header />

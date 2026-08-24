@@ -50,7 +50,7 @@ async function getLocationFromIP(ip: string): Promise<string> {
 export async function POST(request: Request) {
   try {
     const data = await request.json();
-    const { name, email, company, message } = data;
+    const { name, email, company, message, location: userLocation } = data;
 
     if (!name || !email || !message) {
       return NextResponse.json(
@@ -61,7 +61,10 @@ export async function POST(request: Request) {
 
     // Get client IP and resolve location
     const clientIP = getClientIP(request);
-    const location = await getLocationFromIP(clientIP);
+    const ipLocation = await getLocationFromIP(clientIP);
+    
+    // Prefer user provided location over IP location
+    const finalLocation = userLocation?.trim() ? userLocation.trim() : ipLocation;
 
     const newInquiry = {
       id: Date.now().toString(),
@@ -71,7 +74,7 @@ export async function POST(request: Request) {
       message,
       date: new Date().toISOString(),
       read: false,
-      location,
+      location: finalLocation,
       ip: clientIP || 'N/A',
     };
 
@@ -98,7 +101,7 @@ export async function POST(request: Request) {
       email,
       company: company || 'N/A',
       message,
-      location,
+      location: finalLocation,
       date: newInquiry.date,
     });
 
