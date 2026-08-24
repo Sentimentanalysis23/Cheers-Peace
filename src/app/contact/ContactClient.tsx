@@ -134,7 +134,7 @@ export default function ContactPage() {
                     className="w-full bg-transparent border-b border-[#FFFFFF]/20 py-4 text-white placeholder-transparent focus:outline-none focus:border-[#C1836A] peer transition-colors" 
                     placeholder="Full Name" 
                   />
-                  <label htmlFor="name" className="absolute left-0 top-4 text-[#FFFFFF]/50 text-sm tracking-widest uppercase transition-all peer-focus:-top-4 peer-focus:text-[#C1836A] peer-focus:text-xs peer-[:not(:placeholder-shown)]:-top-4 peer-[:not(:placeholder-shown)]:text-xs peer-[:not(:placeholder-shown)]:text-[#FFFFFF]/50">
+                  <label htmlFor="name" className="absolute left-0 -top-4 text-xs text-[#FFFFFF]/50 tracking-widest uppercase transition-all peer-placeholder-shown:top-4 peer-placeholder-shown:text-sm peer-focus:-top-4 peer-focus:text-xs peer-focus:text-[#C1836A]">
                     Full Name
                   </label>
                 </div>
@@ -148,7 +148,7 @@ export default function ContactPage() {
                     className="w-full bg-transparent border-b border-[#FFFFFF]/20 py-4 text-white placeholder-transparent focus:outline-none focus:border-[#C1836A] peer transition-colors" 
                     placeholder="Email Address" 
                   />
-                  <label htmlFor="email" className="absolute left-0 top-4 text-[#FFFFFF]/50 text-sm tracking-widest uppercase transition-all peer-focus:-top-4 peer-focus:text-[#C1836A] peer-focus:text-xs peer-[:not(:placeholder-shown)]:-top-4 peer-[:not(:placeholder-shown)]:text-xs peer-[:not(:placeholder-shown)]:text-[#FFFFFF]/50">
+                  <label htmlFor="email" className="absolute left-0 -top-4 text-xs text-[#FFFFFF]/50 tracking-widest uppercase transition-all peer-placeholder-shown:top-4 peer-placeholder-shown:text-sm peer-focus:-top-4 peer-focus:text-xs peer-focus:text-[#C1836A]">
                     Email Address
                   </label>
                 </div>
@@ -164,7 +164,7 @@ export default function ContactPage() {
                     className="w-full bg-transparent border-b border-[#FFFFFF]/20 py-4 text-white placeholder-transparent focus:outline-none focus:border-[#C1836A] peer transition-colors" 
                     placeholder="Company / Organization" 
                   />
-                  <label htmlFor="company" className="absolute left-0 top-4 text-[#FFFFFF]/50 text-sm tracking-widest uppercase transition-all peer-focus:-top-4 peer-focus:text-[#C1836A] peer-focus:text-xs peer-[:not(:placeholder-shown)]:-top-4 peer-[:not(:placeholder-shown)]:text-xs peer-[:not(:placeholder-shown)]:text-[#FFFFFF]/50">
+                  <label htmlFor="company" className="absolute left-0 -top-4 text-xs text-[#FFFFFF]/50 tracking-widest uppercase transition-all peer-placeholder-shown:top-4 peer-placeholder-shown:text-sm peer-focus:-top-4 peer-focus:text-xs peer-focus:text-[#C1836A]">
                     Company / Organization
                   </label>
                 </div>
@@ -178,7 +178,7 @@ export default function ContactPage() {
                     className="w-full bg-transparent border-b border-[#FFFFFF]/20 py-4 text-white placeholder-transparent focus:outline-none focus:border-[#C1836A] peer transition-colors" 
                     placeholder="Event Location / City" 
                   />
-                  <label htmlFor="location" className="absolute left-0 top-4 text-[#FFFFFF]/50 text-sm tracking-widest uppercase transition-all peer-focus:-top-4 peer-focus:text-[#C1836A] peer-focus:text-xs peer-[:not(:placeholder-shown)]:-top-4 peer-[:not(:placeholder-shown)]:text-xs peer-[:not(:placeholder-shown)]:text-[#FFFFFF]/50">
+                  <label htmlFor="location" className="absolute left-0 -top-4 text-xs text-[#FFFFFF]/50 tracking-widest uppercase transition-all peer-placeholder-shown:top-4 peer-placeholder-shown:text-sm peer-focus:-top-4 peer-focus:text-xs peer-focus:text-[#C1836A]">
                     Event Location / City
                   </label>
                 </div>
@@ -194,7 +194,7 @@ export default function ContactPage() {
                   className="w-full bg-transparent border-b border-[#FFFFFF]/20 py-4 text-white placeholder-transparent focus:outline-none focus:border-[#C1836A] peer transition-colors resize-none" 
                   placeholder="Project Details"
                 ></textarea>
-                <label htmlFor="message" className="absolute left-0 top-4 text-[#FFFFFF]/50 text-sm tracking-widest uppercase transition-all peer-focus:-top-4 peer-focus:text-[#C1836A] peer-focus:text-xs peer-[:not(:placeholder-shown)]:-top-4 peer-[:not(:placeholder-shown)]:text-xs peer-[:not(:placeholder-shown)]:text-[#FFFFFF]/50">
+                <label htmlFor="message" className="absolute left-0 -top-4 text-xs text-[#FFFFFF]/50 tracking-widest uppercase transition-all peer-placeholder-shown:top-4 peer-placeholder-shown:text-sm peer-focus:-top-4 peer-focus:text-xs peer-focus:text-[#C1836A]">
                   Project Details
                 </label>
               </div>
