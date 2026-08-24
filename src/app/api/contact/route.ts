@@ -59,12 +59,10 @@ export async function POST(request: Request) {
       );
     }
 
-    // Get client IP and resolve location
     const clientIP = getClientIP(request);
-    const ipLocation = await getLocationFromIP(clientIP);
     
-    // Prefer user provided location over IP location
-    const finalLocation = userLocation?.trim() ? userLocation.trim() : ipLocation;
+    // Only use the user provided location, as IP geolocations are often inaccurate
+    const finalLocation = userLocation?.trim() ? userLocation.trim() : 'Not provided';
 
     const newInquiry = {
       id: Date.now().toString(),
