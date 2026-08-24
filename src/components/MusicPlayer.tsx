@@ -17,15 +17,24 @@ export default function MusicPlayer() {
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
-  // On mobile, iOS blocks preload. We manually trigger load on mount
-  // so audio is buffered by the time user taps play.
+  // Initialize the DOM Audio object
   useEffect(() => {
-    if (audioRef.current) {
-      audioRef.current.volume = 0.25;
-      // Trigger the browser to start fetching audio data immediately
-      audioRef.current.load();
-    }
-  }, []);
+    // Only create audio element on client side
+    const audio = new Audio();
+    audio.loop = true;
+    audio.preload = "auto";
+    audio.src = isMobile ? "/audio/bgm_mobile.mp3" : "/audio/bgm.mp3";
+    audio.volume = 0.25;
+    audio.load();
+    audioRef.current = audio;
+
+    // Cleanup on unmount
+    return () => {
+      audio.pause();
+      audio.src = "";
+      audioRef.current = null;
+    };
+  }, [isMobile]);
 
   const toggleMusic = async () => {
     const audio = audioRef.current;
@@ -53,14 +62,7 @@ export default function MusicPlayer() {
 
   return (
     <>
-      <audio
-        ref={audioRef}
-        loop
-        preload="auto"
-        playsInline
-        x-webkit-airplay="allow"
-        src={isMobile ? "/audio/bgm_mobile.mp3" : "/audio/bgm.mp3"}
-      />
+      {/* Sound waves animation styles are handled inline or via tailwind */}
 
       <div className="fixed bottom-6 right-6 z-50">
         <button

@@ -36,8 +36,23 @@ export default function EnhancedLuxuryHome() {
   const y = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
 
+  const [particles, setParticles] = useState<{ id: number; opacity: number; y: string; x: string; duration: number; yEnd: string }[]>([]);
+
   useEffect(() => {
     setMounted(true);
+    
+    // Generate particles on client-side only to prevent DOM hydration mismatch
+    setParticles(
+      Array.from({ length: 20 }).map((_, i) => ({
+        id: i,
+        opacity: Math.random() * 0.5 + 0.1,
+        y: Math.random() * 100 + "%",
+        x: Math.random() * 100 + "%",
+        duration: Math.random() * 20 + 10,
+        yEnd: `-${Math.random() * 100}%`
+      }))
+    );
+
     const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % SLIDES.length);
     }, 6000);
@@ -50,20 +65,20 @@ export default function EnhancedLuxuryHome() {
       {/* 0. Ambient Gold Dust Particles (Client Only to prevent Hydration Error) */}
       {mounted && (
         <div className="fixed inset-0 pointer-events-none z-0 hidden md:block">
-          {[...Array(20)].map((_, i) => (
+          {particles.map((p) => (
           <motion.div
-            key={i}
+            key={p.id}
             initial={{ 
-              opacity: Math.random() * 0.5 + 0.1, 
-              y: Math.random() * 100 + "%",
-              x: Math.random() * 100 + "%" 
+              opacity: p.opacity, 
+              y: p.y,
+              x: p.x 
             }}
             animate={{ 
-              y: [null, `-${Math.random() * 100}%`],
+              y: [null, p.yEnd],
               opacity: [null, 0, 0.5]
             }}
             transition={{
-              duration: Math.random() * 20 + 10,
+              duration: p.duration,
               repeat: Infinity,
               ease: "linear"
             }}
