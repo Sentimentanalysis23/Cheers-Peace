@@ -313,8 +313,12 @@ export default function EnhancedLuxuryHome() {
 
           {/* Scroll Item 3 */}
           <div className="portfolio-item relative w-[80vw] max-w-[900px] h-[70vh] shrink-0 rounded-3xl overflow-hidden group cursor-pointer border border-[#C1836A]/20">
-            <Image src="/images/wedding_decor.jpg" alt="Elegant white tent outdoor event setup at night" fill sizes="(max-width: 768px) 100vw, 900px" className="object-cover group-hover:scale-105 transition-transform duration-[2s]" />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#000000] via-[#000000]/40 to-transparent opacity-80" />
+            <Image 
+              src="/images/event_05.jpg" 
+              alt="Elegant white tent outdoor event setup at night" 
+              fill 
+              className="object-cover opacity-90 transition-transform duration-[2s] group-hover:scale-105"
+            /><div className="absolute inset-0 bg-gradient-to-t from-[#000000] via-[#000000]/40 to-transparent opacity-80" />
             <div className="absolute bottom-12 left-12 right-12 z-10">
               <span className="text-[#C1836A] font-bold tracking-[0.3em] uppercase text-sm mb-4 block">03 / Luxury</span>
               <h3 className="font-[family-name:var(--font-playfair)] text-5xl text-white">Cherished Celebrations</h3>

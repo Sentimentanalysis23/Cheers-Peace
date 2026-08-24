@@ -2,32 +2,36 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Wrench, Briefcase, MonitorPlay, Sparkles } from "lucide-react";
 import { useRef } from "react";
 
 const SERVICES = [
   {
     title: "Exhibition Stall Fabrication",
-    description: "We specialize in custom-built stalls for national and global expos — from the Aero India Show to DefExpo. Our team delivers 3D design, material sourcing, structural engineering, and complete on-site assembly with flawless precision.",
+    description: "End-to-end design and fabrication of custom exhibition stalls. We have delivered award-winning stalls for major defense and aerospace events from Aero India Show to DefExpo.",
     image: "/images/event_06.jpg",
+    icon: <Wrench className="w-8 h-8 text-amber-500" />,
     tags: ["Custom Wooden Stalls", "Modular Designs", "3D Visualization"]
   },
   {
     title: "Corporate Event Management",
-    description: "End-to-end execution for high-profile conferences, product launches, dealer meets, and gala dinners. We manage venue selection, permissions, logistics, and on-ground coordination for a seamless, world-class experience.",
-    image: "/images/event_03.jpg",
+    description: "Seamless execution of high-profile conferences, product launches, and corporate gatherings. We handle everything from venue sourcing and stage design to guest management and technical production.",
+    image: "/images/event_08.jpg",
+    icon: <Briefcase className="w-8 h-8 text-amber-500" />,
     tags: ["Product Launches", "Conferences", "Gala Dinners"]
   },
   {
     title: "AV & LED Production",
-    description: "Immersive visual experiences powered by massive LED wall integrations, professional line-array sound systems, and dynamic intelligent lighting rigs. We build the technical infrastructure that commands attention at any scale.",
-    image: "/images/event_09.jpg",
+    description: "State-of-the-art audiovisual solutions. We provide high-resolution LED video walls, concert-grade line array sound systems, and intelligent lighting rigs for impactful presentations.",
+    image: "/images/event_16.jpg",
+    icon: <MonitorPlay className="w-8 h-8 text-amber-500" />,
     tags: ["LED Video Walls", "Line Array Audio", "Intelligent Lighting"]
   },
   {
     title: "Luxury Celebration Décor",
     description: "Breathtaking setups for your most treasured celebrations — from intimate rooftop dinners with rose petal pathways to grand sangeet stages and floral mandaps that create lasting memories.",
-    image: "/images/event_17.jpg",
+    image: "/images/event_14.jpg",
+    icon: <Sparkles className="w-8 h-8 text-amber-500" />,
     tags: ["Floral Mandaps", "Sangeet Stages", "Premium Furniture"]
   }
 ];
