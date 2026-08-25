@@ -5,6 +5,7 @@ import Footer from "@/components/Footer";
 import SmoothScroll from "@/components/SmoothScroll";
 import CustomCursor from "@/components/CustomCursor";
 import MusicPlayer from "@/components/MusicPlayer";
+import DisableInspect from "@/components/DisableInspect";
 import { Inter, Playfair_Display } from "next/font/google";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
@@ -46,6 +47,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.variable} ${playfair.variable} font-sans bg-[#000000] text-[#FFFFFF] antialiased min-h-screen flex flex-col selection:bg-[#C1836A] selection:text-[#000000] cursor-none overflow-x-hidden`}>
+        <DisableInspect />
         <CustomCursor />
         <SmoothScroll>
           <Header />
