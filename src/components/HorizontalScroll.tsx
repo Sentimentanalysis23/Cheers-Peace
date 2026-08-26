@@ -1,6 +1,6 @@
 "use client";
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef, useState, useEffect } from "react";
+import { motion, useScroll, useTransform, useSpring } from "framer-motion";
+import { useRef, useState, useEffect, useLayoutEffect } from "react";
 
 interface HorizontalScrollProps {
   children: React.ReactNode;
@@ -25,15 +25,20 @@ export default function HorizontalScroll({ children }: HorizontalScrollProps) {
   useEffect(() => {
     const updateRange = () => {
       if (scrollRef.current && !isMobile) {
-        // Calculate the exact distance needed to scroll the content so its right edge touches the right edge of the viewport
         const range = scrollRef.current.scrollWidth - window.innerWidth;
         setScrollRange(range > 0 ? range : 0);
       }
     };
     
     updateRange();
+    const observer = new ResizeObserver(() => updateRange());
+    if (scrollRef.current) observer.observe(scrollRef.current);
+    
     window.addEventListener("resize", updateRange);
-    return () => window.removeEventListener("resize", updateRange);
+    return () => {
+      window.removeEventListener("resize", updateRange);
+      observer.disconnect();
+    };
   }, [children, isMobile]);
 
   const { scrollYProgress } = useScroll({
@@ -41,12 +46,15 @@ export default function HorizontalScroll({ children }: HorizontalScrollProps) {
     offset: ["start start", "end end"]
   });
 
-  const x = useTransform(scrollYProgress, [0, 1], [0, -scrollRange]);
+  // Adding a slight spring makes the framer-motion scroll feel much better with Lenis
+  const smoothProgress = useSpring(scrollYProgress, { stiffness: 400, damping: 90, restDelta: 0.001 });
+  const x = useTransform(smoothProgress, [0, 1], ["0px", `-${scrollRange}px`]);
 
   if (isMobile) {
     return (
       <section className="relative bg-[#000000] py-20 w-full overflow-hidden">
-        <div className="flex gap-6 px-6 items-center overflow-x-auto snap-x snap-mandatory w-full pb-8">
+        {/* data-lenis-prevent ensures native horizontal swipe works on mobile without Lenis intercepting it */}
+        <div data-lenis-prevent="true" className="flex gap-6 px-6 items-center overflow-x-auto snap-x snap-mandatory w-full pb-8 scrollbar-hide">
           {children}
         </div>
       </section>
