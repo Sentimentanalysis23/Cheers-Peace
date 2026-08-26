@@ -39,22 +39,12 @@ export default function HorizontalScroll({ children }: HorizontalScrollProps) {
   const x = useTransform(smoothProgress, [0, 1], ["0px", `-${scrollRange}px`]);
 
   return (
-    <>
-      {/* Mobile Version - Native Horizontal Scroll */}
-      <section className="relative bg-[#000000] py-20 w-full overflow-hidden md:hidden block">
-        <div data-lenis-prevent="true" className="flex gap-6 px-6 items-center overflow-x-auto snap-x snap-mandatory w-full pb-8 scrollbar-hide">
+    <section ref={targetRef} className="relative h-[250vh] md:h-[300vh] bg-[#000000]">
+      <div className="sticky top-0 flex h-screen items-center overflow-hidden">
+        <motion.div ref={scrollRef} style={{ x }} className="flex gap-6 md:gap-16 px-6 md:px-12 items-center w-max">
           {children}
-        </div>
-      </section>
-
-      {/* Desktop Version - Framer Motion Sticky Scroll */}
-      <section ref={targetRef} className="relative h-[300vh] bg-[#000000] hidden md:block">
-        <div className="sticky top-0 flex h-screen items-center overflow-hidden">
-          <motion.div ref={scrollRef} style={{ x }} className="flex gap-16 px-12 items-center w-max">
-            {children}
-          </motion.div>
-        </div>
-      </section>
-    </>
+        </motion.div>
+      </div>
+    </section>
   );
 }

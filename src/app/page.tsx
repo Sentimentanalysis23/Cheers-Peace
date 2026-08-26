@@ -91,10 +91,10 @@ export default function EnhancedLuxuryHome() {
       {/* 1. Cinematic Luxury Hero Slider */}
       <section className="relative h-screen w-full flex items-center justify-center overflow-hidden">
         <motion.div style={{ y, opacity }} className="absolute inset-0 z-0">
-          <AnimatePresence mode="wait">
+          <AnimatePresence>
             <motion.div
               key={currentSlide}
-              initial={{ opacity: 0, scale: 1.1 }}
+              initial={{ opacity: 0, scale: 1.05 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 1.5, ease: "easeInOut" }}
