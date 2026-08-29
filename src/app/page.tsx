@@ -418,11 +418,43 @@ export default function EnhancedLuxuryHome() {
         </div>
         
         <div className="relative flex overflow-x-hidden group">
-          <div className="animate-marquee whitespace-nowrap flex items-center gap-24 px-8">
-            {['HAL', 'Microsoft', 'Arkance', 'AMETEK', 'MiG-35', 'Roomer', 'VEKA', 'EPOS', 'Pawan Hans', 'Mazagon Dock', 'HAL', 'Microsoft', 'Arkance', 'AMETEK', 'MiG-35', 'Roomer', 'VEKA'].map((client, i) => (
-              <span key={i} className="font-[family-name:var(--font-playfair)] text-2xl md:text-4xl font-bold text-white/20 hover:text-[#C1836A] hover:scale-110 transition-all duration-500 cursor-default drop-shadow-lg">
-                {client}
-              </span>
+          <div className="animate-marquee whitespace-nowrap flex items-center gap-16 md:gap-24 px-8">
+            {[
+              { type: 'image', src: '/images/clients/hal_v2.png', alt: 'HAL' },
+              { type: 'image', src: '/images/clients/hp_v2.png', alt: 'HP' },
+              { type: 'image', src: '/images/clients/pavilions_v2.png', alt: 'Pavilions and Interiors' },
+              { type: 'image', src: '/images/clients/simplilearn_v2.png', alt: 'Simplilearn' },
+              { type: 'image', src: '/images/clients/mig35_v2.png', alt: 'MiG-35' },
+              { type: 'text', value: 'Microsoft' },
+              { type: 'text', value: 'Arkance' },
+              { type: 'text', value: 'AMETEK' },
+              { type: 'text', value: 'Roomer' },
+              { type: 'text', value: 'VEKA' },
+              { type: 'text', value: 'EPOS' },
+              { type: 'text', value: 'Pawan Hans' },
+              { type: 'text', value: 'Mazagon Dock' },
+              { type: 'image', src: '/images/clients/hal_v2.png', alt: 'HAL' },
+              { type: 'image', src: '/images/clients/hp_v2.png', alt: 'HP' },
+              { type: 'image', src: '/images/clients/pavilions_v2.png', alt: 'Pavilions and Interiors' },
+              { type: 'image', src: '/images/clients/simplilearn_v2.png', alt: 'Simplilearn' },
+              { type: 'image', src: '/images/clients/mig35_v2.png', alt: 'MiG-35' },
+              { type: 'text', value: 'Microsoft' },
+              { type: 'text', value: 'Arkance' },
+              { type: 'text', value: 'AMETEK' },
+              { type: 'text', value: 'Roomer' },
+              { type: 'text', value: 'VEKA' },
+            ].map((client, i) => (
+              <div key={i} className="flex-shrink-0 flex items-center justify-center hover:scale-110 transition-all duration-500">
+                {client.type === 'image' ? (
+                  <div className="relative h-16 w-32 md:h-20 md:w-40 bg-white/95 rounded-xl p-2 shadow-[0_0_15px_rgba(193,131,106,0.3)] border border-[#C1836A]/20">
+                    <Image src={client.src!} alt={client.alt!} fill className="object-contain p-2" />
+                  </div>
+                ) : (
+                  <span className="font-[family-name:var(--font-playfair)] text-2xl md:text-4xl font-bold text-white/20 hover:text-[#C1836A] cursor-default drop-shadow-lg">
+                    {client.value}
+                  </span>
+                )}
+              </div>
             ))}
           </div>
         </div>
