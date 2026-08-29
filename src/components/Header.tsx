@@ -41,7 +41,7 @@ export default function Header() {
         backdropFilter: scrolled ? "blur(16px)" : "none",
         borderBottom: scrolled ? "1px solid rgba(212,175,55,0.2)" : "1px solid transparent",
         boxShadow: scrolled ? "0 4px 30px rgba(0,0,0,0.5)" : "none",
-        padding: scrolled ? "12px 0" : "16px 0",
+        padding: scrolled ? "8px 0" : "12px 0",
       }}>
         <div style={{
           width: "100%",
@@ -66,13 +66,13 @@ export default function Header() {
               justifyContent: "center",
             }}>
               <Image
-                src="/images/logo.png"
+                src="/images/main_logo.png"
                 alt="Cheers & Peace Logo"
-                width={150}
-                height={80}
+                width={200}
+                height={120}
                 style={{
-                  width: isMobile ? "100px" : "150px",
-                  height: "auto",
+                  height: isMobile ? "60px" : "85px",
+                  width: "auto",
                   objectFit: "contain"
                 }}
                 priority
@@ -88,7 +88,8 @@ export default function Header() {
               gap: "40px",
               position: "absolute",
               left: "50%",
-              transform: "translateX(-50%)",
+              top: "50%",
+              transform: "translate(-50%, -50%)",
             }}>
               {navLinks.map((item) => (
                 <Link

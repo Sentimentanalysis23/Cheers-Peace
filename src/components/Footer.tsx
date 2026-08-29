@@ -15,7 +15,7 @@ export default function Footer() {
           <div className="col-span-1 md:col-span-2">
             <Link href="/" className="mb-6 inline-block hover:opacity-80 transition-opacity">
               <div className="relative h-28 w-44 md:h-32 md:w-56 shrink-0 overflow-hidden">
-                <Image src="/images/logo.png" alt="Cheers & Peace Logo" fill sizes="(max-width: 768px) 176px, 224px" className="object-contain" />
+                <Image src="/images/main_logo.png" alt="Cheers & Peace Logo" fill sizes="(max-width: 768px) 176px, 224px" className="object-contain" />
               </div>
             </Link>
             <p className="text-[#FFFFFF]/70 font-light leading-relaxed max-w-md mb-8">
@@ -51,7 +51,8 @@ export default function Footer() {
           <div>
             <h4 className="text-white font-bold tracking-[0.2em] text-sm mb-6 uppercase">Contact</h4>
             <ul className="space-y-4 text-[#FFFFFF]/70 text-sm font-light">
-              <li>Bangalore, India</li>
+              <li>Next to Someshwara Temple, G Floor, No. N-21, Somvarpet Main Road, Somvarpet, Kodagu, Karnataka, 571236</li>
+              <li>1st Block, Cansa Dhiya, Panathur Ext, Kadubeesanahalli, Panathur, Bengaluru, Karnataka 560103</li>
               <li>
                 <a href="mailto:Cheerspeace06@gmail.com" className="hover:text-[#C1836A] transition-colors">Cheerspeace06@gmail.com</a>
               </li>

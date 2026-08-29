@@ -74,9 +74,23 @@ export default function ContactPage() {
                   <div>
                     <h4 className="text-white font-bold tracking-widest uppercase text-sm mb-2">Headquarters</h4>
                     <p className="text-[#FFFFFF]/70 font-light leading-relaxed">
-                      123 Event Horizon Way<br />
-                      Indiranagar, Bangalore<br />
-                      Karnataka, India 560038
+                      Next to Someshwara Temple, G Floor<br />
+                      No. N-21, Somvarpet Main Road, Somvarpet, Kodagu<br />
+                      Karnataka, India 571236
+                    </p>
+                  </div>
+                </div>
+                
+                <div className="flex gap-6 group">
+                  <div className="w-12 h-12 rounded-full border border-[#C1836A]/30 flex items-center justify-center text-[#C1836A] group-hover:bg-[#C1836A] group-hover:text-[#000000] transition-all duration-300 shrink-0">
+                    <MapPin size={20} />
+                  </div>
+                  <div>
+                    <h4 className="text-white font-bold tracking-widest uppercase text-sm mb-2">Branch Office</h4>
+                    <p className="text-[#FFFFFF]/70 font-light leading-relaxed">
+                      1st Block, Cansa Dhiya, Panathur Ext<br />
+                      Kadubeesanahalli, Panathur<br />
+                      Bengaluru, Karnataka 560103
                     </p>
                   </div>
                 </div>
